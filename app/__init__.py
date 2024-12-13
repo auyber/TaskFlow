@@ -1,21 +1,22 @@
-# app/__init__.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_migrate import Migrate  # Importar Flask-Migrate
+from flask_migrate import Migrate
+import os  # Para gerar uma chave secreta aleatória
 
 # Inicializar a instância do banco de dados, do login e do Migrate
 db = SQLAlchemy()
 login_manager = LoginManager()
-migrate = Migrate()  # Inicializar o Migrate
+migrate = Migrate()
 
 def create_app():
     # Criar a instância do Flask
     app = Flask(__name__)
-    
+
     # Configurações do aplicativo
-    app.config['SECRET_KEY'] = 'your_secret_key'  # Alterar para uma chave secreta segura
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Alterar para o URI do seu banco de dados
+    app.config['SECRET_KEY'] = os.urandom(24)  # Gerando uma chave secreta aleatória
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Caminho para o banco de dados
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Desabilitar modificações de rastreamento no SQLAlchemy
 
     # Inicializar o banco de dados, o login e o Flask-Migrate
     db.init_app(app)
@@ -32,6 +33,6 @@ def create_app():
     from app.routes import init_routes
     init_routes(app)
 
-    app.config['DEBUG'] = True
+    app.config['DEBUG'] = True  # Configuração de debug
 
     return app

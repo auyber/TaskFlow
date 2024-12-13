@@ -1,26 +1,28 @@
-<!-- templates/tasks.html -->
-<h2>Tarefas</h2>
-<a href="{{ url_for('create_task') }}">Criar Tarefa</a>
-
-<!-- Exibe mensagens flash -->
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <ul>
-        {% for category, message in messages %}
-            <li class="alert alert-{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
-
-<ul>
-    {% for task in tasks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarefas</title>
+</head>
+<body>
+    <h2>Tarefas</h2>
+    
+    <ul>
+        {% for task in tasks %}
         <li>
-            <strong>{{ task.title }}</strong> - {{ task.completed | yesno }}
-            <a href="{{ url_for('edit_task', task_id=task.id) }}">Editar</a>
+            {{ task.title }} - 
+            <a href="{{ url_for('edit_task', task_id=task.id) }}">Editar</a> | 
             <form action="{{ url_for('delete_task', task_id=task.id) }}" method="POST" style="display:inline;">
                 <button type="submit">Excluir</button>
             </form>
         </li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="{{ url_for('create_task') }}">Criar Nova Tarefa</a>
+    <br>
+    <a href="{{ url_for('index') }}">Voltar para o Index</a>  <!-- Botão de Voltar -->
+
+</body>
+</html>

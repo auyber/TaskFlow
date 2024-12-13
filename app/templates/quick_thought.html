@@ -1,12 +1,55 @@
-<!-- templates/quick_thought.html -->
-<h2>Pensamentos Rápidos</h2>
-<form method="POST">
-    <textarea name="content" required></textarea>
-    <button type="submit">Adicionar Pensamento</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pensamentos Rápidos</title>
+</head>
+<body>
+    <h2>Pensamentos Rápidos</h2>
+    
+    <!-- Formulário para adicionar um novo pensamento -->
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        
+        <div>
+            <label for="content">{{ form.content.label }}</label>
+            {{ form.content() }}
+        </div>
+        
+        <div>
+            <button type="submit">Adicionar Pensamento</button>
+        </div>
+    </form>
 
-<ul>
-    {% for thought in thoughts %}
-        <li>{{ thought.content }}</li>
-    {% endfor %}
-</ul>
+    <h3>Meus Pensamentos</h3>
+    <ul>
+        {% for thought in thoughts %}
+        <li>
+            {% if thought.id == editing_thought_id %}
+                <!-- Formulário para editar o pensamento -->
+                <form method="POST" action="{{ url_for('edit_thought', thought_id=thought.id) }}">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <label for="content">Novo Pensamento:</label>
+                        <textarea name="content">{{ thought.content }}</textarea>
+                    </div>
+                    <div>
+                        <button type="submit">Atualizar Pensamento</button>
+                    </div>
+                </form>
+            {% else %}
+                {{ thought.content }} - 
+                <a href="{{ url_for('quick_thought', edit=thought.id) }}">Editar</a> | 
+                <form action="{{ url_for('delete_thought', thought_id=thought.id) }}" method="POST" style="display:inline;">
+                    <button type="submit">Excluir</button>
+                </form>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="{{ url_for('index') }}">Voltar para o Index</a>  <!-- Botão de Voltar -->
+
+</body>
+</html>

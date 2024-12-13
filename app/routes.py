@@ -3,28 +3,27 @@ from flask_login import login_user, login_required, current_user, logout_user
 from app import db
 from app.models import User, Task, QuickThought
 from werkzeug.security import check_password_hash, generate_password_hash
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, QuickThoughtForm, TaskForm
 
 def init_routes(app):
-    # Filtro customizado para 'yesno' para tratar valores booleanos
+    # Filtro customizado para 'yesno'
     @app.template_filter('yesno')
     def yesno_filter(value):
         return "Concluída" if value else "Não concluída"
-    
-    # Rota da página inicial (index)
+
+    # Página inicial
     @app.route('/index')
     @login_required
     def index():
         return render_template('index.html')
 
-    # Rota de login
+    # Login
     @app.route('/', methods=['GET', 'POST'])
     def login():
         if current_user.is_authenticated:
             return redirect(url_for('index'))
 
         form = LoginForm()
-        
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data).first()
             if user and check_password_hash(user.password, form.password.data):
@@ -34,14 +33,13 @@ def init_routes(app):
                 flash("Usuário ou senha incorretos. Tente novamente.", "error")
         return render_template('login.html', form=form)
 
-    # Rota de registro de usuário
+    # Registro de usuários
     @app.route('/register', methods=['GET', 'POST'])
     def register():
         if current_user.is_authenticated:
             return redirect(url_for('index'))
 
         form = RegistrationForm()
-        
         if form.validate_on_submit():
             username = form.username.data
             email = form.email.data
@@ -68,33 +66,32 @@ def init_routes(app):
 
         return render_template('register.html', form=form)
 
-    # Rota para exibir tarefas do usuário
+    # Tarefas
     @app.route('/tasks', methods=['GET'])
     @login_required
     def tasks():
         user_tasks = Task.query.filter_by(user_id=current_user.id).all()
         return render_template('tasks.html', tasks=user_tasks)
 
-    # Rota para criar uma tarefa
+    # Criar tarefa
     @app.route('/task/create', methods=['GET', 'POST'])
     @login_required
     def create_task():
-        if request.method == 'POST':
-            title = request.form['title']
-            description = request.form['description']
-            if not title:
-                flash("O título é obrigatório.", "error")
-                return redirect(url_for('create_task'))
+        form = TaskForm()
+        if form.validate_on_submit():
+            title = form.title.data
+            description = form.description.data
 
             new_task = Task(title=title, description=description, user_id=current_user.id)
             db.session.add(new_task)
             db.session.commit()
+
             flash("Tarefa criada com sucesso!", "success")
-            return redirect(url_for('tasks'))  # Redireciona para a página de tarefas
+            return redirect(url_for('tasks'))
 
-        return render_template('create_task.html')
+        return render_template('create_task.html', form=form)
 
-    # Rota para editar uma tarefa
+    # Editar tarefa
     @app.route('/task/edit/<int:task_id>', methods=['GET', 'POST'])
     @login_required
     def edit_task(task_id):
@@ -103,17 +100,17 @@ def init_routes(app):
             flash("Você não tem permissão para editar esta tarefa.", "error")
             return redirect(url_for('tasks'))
 
-        if request.method == 'POST':
-            task.title = request.form['title']
-            task.description = request.form['description']
-            task.completed = 'completed' in request.form
+        form = TaskForm(obj=task)
+        if form.validate_on_submit():
+            task.title = form.title.data
+            task.description = form.description.data
             db.session.commit()
             flash("Tarefa atualizada com sucesso!", "success")
             return redirect(url_for('tasks'))
 
-        return render_template('edit_task.html', task=task)
+        return render_template('edit_task.html', form=form, task=task)
 
-    # Rota para excluir uma tarefa
+    # Excluir tarefa
     @app.route('/task/delete/<int:task_id>', methods=['POST'])
     @login_required
     def delete_task(task_id):
@@ -124,19 +121,18 @@ def init_routes(app):
 
         db.session.delete(task)
         db.session.commit()
-        flash("Tarefa excluída com sucesso!", "success")  # Mensagem flash após exclusão
-        return redirect(url_for('tasks'))  # Redireciona para a página de tarefas
+        flash("Tarefa excluída com sucesso!", "success")
+        return redirect(url_for('tasks'))
 
-    # Rota para adicionar um pensamento rápido
+    # Pensamentos Rápidos
     @app.route('/quick-thought', methods=['GET', 'POST'])
     @login_required
     def quick_thought():
-        if request.method == 'POST':
-            content = request.form['content']
-            if not content:
-                flash("O conteúdo não pode estar vazio.", "error")
-                return redirect(url_for('quick_thought'))
+        form = QuickThoughtForm()
+        editing_thought_id = request.args.get('edit', type=int)
 
+        if form.validate_on_submit() and not editing_thought_id:
+            content = form.content.data
             new_thought = QuickThought(content=content, user_id=current_user.id)
             db.session.add(new_thought)
             db.session.commit()
@@ -144,9 +140,36 @@ def init_routes(app):
             return redirect(url_for('quick_thought'))
 
         thoughts = QuickThought.query.filter_by(user_id=current_user.id).all()
-        return render_template('quick_thought.html', thoughts=thoughts)
+        return render_template('quick_thought.html', form=form, thoughts=thoughts, editing_thought_id=editing_thought_id)
 
-    # Rota para fazer logout
+    @app.route('/quick-thought/edit/<int:thought_id>', methods=['POST'])
+    @login_required
+    def edit_thought(thought_id):
+        thought = QuickThought.query.get_or_404(thought_id)
+        if thought.user_id != current_user.id:
+            flash("Você não tem permissão para editar este pensamento.", "error")
+            return redirect(url_for('quick_thought'))
+
+        content = request.form.get('content')
+        if content:
+            thought.content = content
+            db.session.commit()
+            flash("Pensamento atualizado com sucesso!", "success")
+        return redirect(url_for('quick_thought'))
+
+    @app.route('/quick-thought/delete/<int:thought_id>', methods=['POST'])
+    @login_required
+    def delete_thought(thought_id):
+        thought = QuickThought.query.get_or_404(thought_id)
+        if thought.user_id != current_user.id:
+            flash("Você não tem permissão para excluir este pensamento.", "error")
+            return redirect(url_for('quick_thought'))
+
+        db.session.delete(thought)
+        db.session.commit()
+        flash("Pensamento excluído com sucesso!", "success")
+        return redirect(url_for('quick_thought'))
+
     @app.route('/logout')
     @login_required
     def logout():
