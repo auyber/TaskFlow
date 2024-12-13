@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+
+    <!-- Exibir mensagens de erro (flash) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Formulário de registro -->
+    <form method="POST">
+        {{ form.hidden_tag() }}  <!-- Proteção contra CSRF -->
+        
+        <!-- Campo de nome de usuário -->
+        <div>
+            <label for="username">{{ form.username.label }}</label>
+            {{ form.username() }}  <!-- Exibe o campo de input para o nome de usuário -->
+        </div>
+
+        <!-- Campo de email -->
+        <div>
+            <label for="email">{{ form.email.label }}</label>
+            {{ form.email() }}  <!-- Exibe o campo de input para o email -->
+        </div>
+
+        <!-- Campo de senha -->
+        <div>
+            <label for="password">{{ form.password.label }}</label>
+            {{ form.password() }}  <!-- Exibe o campo de input para a senha -->
+        </div>
+
+        <!-- Botão para enviar o formulário -->
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+
+    <!-- Link para a página de login, caso o usuário já tenha uma conta -->
+    <p>Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a></p>
+</body>
+</html>
