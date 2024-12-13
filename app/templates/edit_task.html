@@ -1,0 +1,14 @@
+<!-- templates/edit_task.html -->
+<h2>Editar Tarefa</h2>
+<form method="POST">
+    <label for="title">Título</label>
+    <input type="text" name="title" value="{{ task.title }}" required>
+    
+    <label for="description">Descrição</label>
+    <textarea name="description">{{ task.description }}</textarea>
+    
+    <label for="completed">Concluída</label>
+    <input type="checkbox" name="completed" {% if task.completed %} checked {% endif %}>
+    
+    <button type="submit">Atualizar Tarefa</button>
+</form>

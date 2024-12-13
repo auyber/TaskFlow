@@ -33,6 +33,11 @@
         <div>
             <label for="email">{{ form.email.label }}</label>
             {{ form.email() }}  <!-- Exibe o campo de input para o email -->
+            
+            <!-- Exibe erros específicos do campo de email -->
+            {% for error in form.email.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
         </div>
 
         <!-- Campo de senha -->

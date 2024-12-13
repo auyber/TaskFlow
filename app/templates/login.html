@@ -6,27 +6,40 @@
 </head>
 <body>
     <h2>Login</h2>
+    
+    <!-- Exibir mensagens de erro (flash) -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
                 {% for category, message in messages %}
-                    <li class="flash-{{ category }}">{{ message }}</li>
+                    <li class="flash-{{ category }}">{{ message }}</li>  <!-- Exibe as mensagens de erro -->
                 {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
+
+    <!-- Formulário de login -->
     <form method="POST">
         {{ form.hidden_tag() }}
+        
+        <!-- Campo de email -->
         <div>
-            {{ form.email.label }}: {{ form.email() }}
+            <label for="email">{{ form.email.label }}</label>
+            {{ form.email() }}
         </div>
+
+        <!-- Campo de senha -->
         <div>
-            {{ form.password.label }}: {{ form.password() }}
+            <label for="password">{{ form.password.label }}</label>
+            {{ form.password() }}
         </div>
+
+        <!-- Botão para enviar o formulário -->
         <div>
             <button type="submit">Login</button>
         </div>
     </form>
+
     <br>
     <a href="{{ url_for('register') }}">Cadastrar-se</a>
 </body>

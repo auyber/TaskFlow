@@ -1,0 +1,12 @@
+<!-- templates/quick_thought.html -->
+<h2>Pensamentos Rápidos</h2>
+<form method="POST">
+    <textarea name="content" required></textarea>
+    <button type="submit">Adicionar Pensamento</button>
+</form>
+
+<ul>
+    {% for thought in thoughts %}
+        <li>{{ thought.content }}</li>
+    {% endfor %}
+</ul>

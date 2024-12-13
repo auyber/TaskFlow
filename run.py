@@ -1,6 +1,6 @@
 # run.py
 from app import create_app, db
-from app.models import User, Post  # Importe os modelos para garantir que o SQLAlchemy os registre
+from app.models import User  # Importe os modelos para garantir que o SQLAlchemy os registre
 
 app = create_app()
 
