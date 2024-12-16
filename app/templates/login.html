@@ -2,47 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TaskFlow</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
-</head>
 <body>
-    <h2>Login</h2>
-    
-    <!-- Exibir mensagens de erro (flash) -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    <li class="flash-{{ category }}">{{ message }}</li>  <!-- Exibe as mensagens de erro -->
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+    <!-- Topo da página com o nome do projeto -->
+    <header class="text-center py-4">
+        <h1 id="login">TaskFlow</h1>
+    </header>
 
-    <!-- Formulário de login -->
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        
-        <!-- Campo de email -->
-        <div>
-            <label for="email">{{ form.email.label }}</label>
-            {{ form.email() }}
+    <!-- Conteúdo principal -->
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-06">
+            <!-- Exibir mensagens de erro (flash) -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul>
+                        {% for category, message in messages %}
+                            <li class="flash-{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Formulário de login -->
+            <form method="POST">
+                {{ form.hidden_tag() }} <!-- Proteção contra CSRF -->
+                
+                <!-- Campo de email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">{{ form.email.label }}</label>
+                    {{ form.email(class="form-control") }}
+                </div>
+
+                <!-- Campo de senha -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">{{ form.password.label }}</label>
+                    {{ form.password(class="form-control") }}
+                </div>
+
+                <!-- Botão para enviar o formulário -->
+                <div class="mb-3 text-center">
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </div>
+            </form>
+
+            <!-- Texto centralizado abaixo do formulário -->
+            <div class="text-center">
+                <p>Não tem uma conta? <a href="{{ url_for('register') }}" class="btn btn-link">Cadastre-se</a></p>
+            </div>
         </div>
+    </div>
 
-        <!-- Campo de senha -->
-        <div>
-            <label for="password">{{ form.password.label }}</label>
-            {{ form.password() }}
-        </div>
-
-        <!-- Botão para enviar o formulário -->
-        <div>
-            <button type="submit">Login</button>
-        </div>
-    </form>
-
-    <br>
-    <a href="{{ url_for('register') }}">Cadastrar-se</a>
+    <!-- Footer fixo -->
+    <footer>
+        <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
+    </footer>
 </body>
 </html>
