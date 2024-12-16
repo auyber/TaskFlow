@@ -2,31 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Tarefa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
 </head>
 <body>
-    <h2>Criar Tarefa</h2>
-    
-    <!-- Formulário -->
+    <h1>Criar Tarefa</h1>
+
+    <!-- Exibição das mensagens flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Formulário para criar uma nova tarefa -->
     <form method="POST">
         {{ form.hidden_tag() }}
         
         <div>
             <label for="title">{{ form.title.label }}</label>
-            {{ form.title(size=50) }}  <!-- Renderiza o campo de entrada com tamanho ajustado -->
+            {{ form.title(class_="form-control") }}
         </div>
         
         <div>
             <label for="description">{{ form.description.label }}</label>
-            {{ form.description(rows=5, cols=50) }}  <!-- Renderiza a área de texto -->
+            {{ form.description(class_="form-control") }}
         </div>
         
         <div>
-            {{ form.submit(class="btn btn-primary") }}  <!-- Botão de envio -->
+            <button type="submit">Criar Tarefa</button>
         </div>
     </form>
 
     <br>
-    <a href="{{ url_for('index') }}">Voltar para o Index</a>
+    <!-- Link para voltar à lista de tarefas -->
+    <a href="{{ url_for('tasks') }}">Ver Tarefas</a>
 </body>
 </html>

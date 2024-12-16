@@ -73,11 +73,11 @@ def init_routes(app):
         user_tasks = Task.query.filter_by(user_id=current_user.id).all()
         return render_template('tasks.html', tasks=user_tasks)
 
-    # Criar tarefa
     @app.route('/task/create', methods=['GET', 'POST'])
     @login_required
     def create_task():
         form = TaskForm()
+
         if form.validate_on_submit():
             title = form.title.data
             description = form.description.data
@@ -87,7 +87,7 @@ def init_routes(app):
             db.session.commit()
 
             flash("Tarefa criada com sucesso!", "success")
-            return redirect(url_for('tasks'))
+            return redirect(url_for('create_task'))  # Mantém o usuário na página atual
 
         return render_template('create_task.html', form=form)
 
