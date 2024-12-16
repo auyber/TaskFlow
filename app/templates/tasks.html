@@ -1,32 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Tarefas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <h2>Minhas Tarefas</h2>
+{% extends "base.html" %}
 
-    <!-- Exibir mensagens flash -->
+{% block title %}Minhas Tarefas{% endblock %}
+
+{% block content %}
+    <h2>Minhas Tarefas</h2>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
                 {% for category, message in messages %}
-                    {% if category == 'create_task_success' %}
-                        <li class="{{ category }}">{{ message }}</li>
-                    {% elif category == 'edit_task_success' %}
-                        <li class="{{ category }}">{{ message }}</li>
-                    {% elif category == 'delete_task_success' %}
-                        <li class="{{ category }}">{{ message }}</li>
-                    {% endif %}
+                    <li class="alert {{ category }}">{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
 
-    <!-- Listar tarefas -->
     <ul>
         {% for task in tasks %}
             <li>
@@ -39,46 +26,30 @@
         {% endfor %}
     </ul>
 
-    <!-- Formulário de edição (invisível inicialmente) -->
     <div id="edit-form-container" style="display:none;">
         <h3>Editar Tarefa</h3>
         <form method="POST">
             {{ form.hidden_tag() }}
             <input type="hidden" name="task_id" id="task-id-input">
-            <div>
-                <label for="title">{{ form.title.label }}</label>
-                {{ form.title() }}
+            <div class="mb-3">
+                <label for="title" class="form-label">{{ form.title.label }}</label>
+                {{ form.title(class="form-control") }}
             </div>
-            <div>
-                <label for="description">{{ form.description.label }}</label>
-                {{ form.description() }}
+            <div class="mb-3">
+                <label for="description" class="form-label">{{ form.description.label }}</label>
+                {{ form.description(class="form-control") }}
             </div>
-            <div>
-                <button type="submit">Atualizar Tarefa</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Atualizar Tarefa</button>
         </form>
     </div>
 
-    <a href="{{ url_for('create_task') }}">Criar Tarefa</a>
-    <a href="{{ url_for('index') }}">Voltar para o Index</a>
+    <a href="{{ url_for('create_task') }}" class="btn btn-primary">Criar Tarefa</a>
+    <a href="{{ url_for('index') }}" class="btn btn-link">Voltar para o Index</a>
 
     <script>
-        // Função para mostrar o formulário de edição
         function showEditForm(taskId) {
-            // Preencher o ID da tarefa no formulário
             document.getElementById('task-id-input').value = taskId;
-
-            // Mostrar o formulário de edição
             document.getElementById('edit-form-container').style.display = 'block';
-            
-            // Preencher os campos do formulário com os valores da tarefa
-            var taskElement = document.querySelector(`button[data-task-id='${taskId}']`).parentElement;
-            var title = taskElement.querySelector('span.task-title').textContent;
-            var description = taskElement.querySelector('span.task-description').textContent;
-
-            document.getElementById('title').value = title;
-            document.getElementById('description').value = description;
         }
     </script>
-</body>
-</html>
+{% endblock %}

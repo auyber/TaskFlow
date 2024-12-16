@@ -1,33 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Tarefa</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Editar Tarefa{% endblock %}
+
+{% block content %}
     <h2>Editar Tarefa</h2>
-    
     <form method="POST">
         {{ form.hidden_tag() }}
-        
-        <div>
-            <label for="title">{{ form.title.label }}</label>
-            {{ form.title() }}
+        <div class="mb-3">
+            <label for="title" class="form-label">{{ form.title.label }}</label>
+            {{ form.title(class="form-control") }}
         </div>
-        
-        <div>
-            <label for="description">{{ form.description.label }}</label>
-            {{ form.description() }}
+        <div class="mb-3">
+            <label for="description" class="form-label">{{ form.description.label }}</label>
+            {{ form.description(class="form-control") }}
         </div>
-        
-        <div>
-            <button type="submit">Atualizar Tarefa</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Atualizar Tarefa</button>
     </form>
-
-    <br>
-    <a href="{{ url_for('tasks') }}">Voltar para Minhas Tarefas</a> <!-- Ajuste para voltar diretamente para as tarefas -->
-
-</body>
-</html>
+    <a href="{{ url_for('tasks') }}" class="btn btn-link">Voltar para Minhas Tarefas</a>
+{% endblock %}

@@ -1,45 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Criar Tarefa</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Criar Tarefa{% endblock %}
+
+{% block content %}
     <h2>Criar Tarefa</h2>
-
-    <!-- Exibir mensagens flash -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    {% if category == 'create_task_success' %}
-                        <li class="{{ category }}">{{ message }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
     <form method="POST">
         {{ form.hidden_tag() }}
-        
-        <div>
-            <label for="title">{{ form.title.label }}</label>
-            {{ form.title() }}
+        <div class="mb-3">
+            <label for="title" class="form-label">{{ form.title.label }}</label>
+            {{ form.title(class="form-control") }}
         </div>
-        
-        <div>
-            <label for="description">{{ form.description.label }}</label>
-            {{ form.description() }}
+        <div class="mb-3">
+            <label for="description" class="form-label">{{ form.description.label }}</label>
+            {{ form.description(class="form-control") }}
         </div>
-        
-        <div>
-            <button type="submit">Criar Tarefa</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Criar Tarefa</button>
     </form>
-
-    <a href="{{ url_for('tasks') }}">Voltar para Tarefas</a> <!-- Botão de Voltar -->
-
-</body>
-</html>
+    <a href="{{ url_for('tasks') }}" class="btn btn-link">Voltar para Tarefas</a>
+{% endblock %}

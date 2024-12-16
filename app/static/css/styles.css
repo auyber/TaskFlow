@@ -6,6 +6,9 @@ body {
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Cabeçalho */
@@ -82,7 +85,7 @@ a:hover {
     color: #0056b3;
 }
 
-
+/* Mensagens de sucesso e erro */
 .success {
     color: green;
     font-weight: bold;
@@ -91,4 +94,73 @@ a:hover {
 .error {
     color: red;
     font-weight: bold;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #f8f9fa; /* Cor de fundo mais clara */
+    border-bottom: 1px solid #ddd; /* Adiciona uma borda sutil */
+}
+
+.navbar-nav .nav-link {
+    color: #495057 !important; /* Cor mais suave para links */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff !important;
+}
+
+/* Estilo do menu expansível */
+.navbar-toggler-icon {
+    background-color: #007bff;
+}
+
+/* Layout de página */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Footer fixo */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+/* Estilo de botões personalizados */
+.btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn-outline-light:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Ajustes para exibição em dispositivos móveis */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 5px 0;
+    }
+
+    .container {
+        padding: 10px;
+    }
 }

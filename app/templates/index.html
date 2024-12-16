@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow - Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Bem-vindo ao TaskFlow{% endblock %}
+
+{% block content %}
     {% if current_user.is_authenticated %}
-        <h1>Welcome, {{ current_user.username }}!</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('create_task') }}">Create Task</a></li>
-                <li><a href="{{ url_for('tasks') }}">My Tasks</a></li>
-                <li><a href="{{ url_for('quick_thought') }}">Quick Thoughts</a></li>
-            </ul>
-        </nav>
-        <a href="{{ url_for('logout') }}">Logout</a>  <!-- Caso o usuário já esteja logado -->
+        <div class="text-center">
+            <h1>Bem-vindo, {{ current_user.username }}!</h1>
+        </div>
     {% else %}
-        <h1>Welcome to TaskFlow!</h1>
-        <a href="{{ url_for('login') }}">Login</a> | 
-        <a href="{{ url_for('register') }}">Register</a>
+        <div class="text-center">
+            <h1>Bem-vindo ao TaskFlow!</h1>
+            <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a> | 
+            <a href="{{ url_for('register') }}" class="btn btn-secondary">Registrar</a>
+        </div>
     {% endif %}
-</body>
-</html>
+{% endblock %}

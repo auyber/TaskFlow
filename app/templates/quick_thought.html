@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pensamentos Rápidos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Pensamentos Rápidos{% endblock %}
+
+{% block content %}
     <h2>Pensamentos Rápidos</h2>
-    
-    <!-- Exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
@@ -18,19 +13,14 @@
             </ul>
         {% endif %}
     {% endwith %}
-    
-    <!-- Formulário para adicionar um novo pensamento -->
+
     <form method="POST">
         {{ form.hidden_tag() }}
-        
-        <div>
-            <label for="content">{{ form.content.label }}</label>
-            {{ form.content() }}
+        <div class="mb-3">
+            <label for="content" class="form-label">{{ form.content.label }}</label>
+            {{ form.content(class="form-control") }}
         </div>
-        
-        <div>
-            <button type="submit">Adicionar Pensamento</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Pensamento</button>
     </form>
 
     <h3>Meus Pensamentos</h3>
@@ -38,29 +28,26 @@
         {% for thought in thoughts %}
         <li>
             {% if thought.id == editing_thought_id %}
-                <!-- Formulário para editar o pensamento -->
                 <form method="POST" action="{{ url_for('edit_thought', thought_id=thought.id) }}">
                     {{ form.hidden_tag() }}
-                    <div>
-                        <label for="content">Novo Pensamento:</label>
-                        <textarea name="content">{{ thought.content }}</textarea>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Novo Pensamento:</label>
+                        <textarea name="content" class="form-control">{{ thought.content }}</textarea>
                     </div>
                     <div>
-                        <button type="submit">Atualizar Pensamento</button>
+                        <button type="submit" class="btn btn-primary">Atualizar Pensamento</button>
                     </div>
                 </form>
             {% else %}
                 {{ thought.content }} - 
-                <a href="{{ url_for('quick_thought', edit=thought.id) }}">Editar</a> | 
+                <a href="{{ url_for('quick_thought', edit=thought.id) }}" class="btn btn-link">Editar</a> | 
                 <form action="{{ url_for('delete_thought', thought_id=thought.id) }}" method="POST" style="display:inline;">
-                    <button type="submit">Excluir</button>
+                    <button type="submit" class="btn btn-link">Excluir</button>
                 </form>
             {% endif %}
         </li>
         {% endfor %}
     </ul>
 
-    <br>
-    <a href="{{ url_for('index') }}">Voltar para o Index</a>  <!-- Botão de Voltar -->
-</body>
-</html>
+    <a href="{{ url_for('index') }}" class="btn btn-link">Voltar para o Index</a>
+{% endblock %}
