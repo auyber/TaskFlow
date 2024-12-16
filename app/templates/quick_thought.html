@@ -8,6 +8,17 @@
 <body>
     <h2>Pensamentos Rápidos</h2>
     
+    <!-- Exibir mensagens flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="alert {{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
     <!-- Formulário para adicionar um novo pensamento -->
     <form method="POST">
         {{ form.hidden_tag() }}
@@ -51,6 +62,5 @@
 
     <br>
     <a href="{{ url_for('index') }}">Voltar para o Index</a>  <!-- Botão de Voltar -->
-
 </body>
 </html>

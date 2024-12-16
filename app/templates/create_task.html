@@ -2,37 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Tarefa</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    
 </head>
 <body>
-    <h1>Criar Tarefa</h1>
+    <h2>Criar Tarefa</h2>
 
-    <!-- Exibição das mensagens flash -->
+    <!-- Exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
                 {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
+                    {% if category == 'create_task_success' %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
 
-    <!-- Formulário para criar uma nova tarefa -->
     <form method="POST">
         {{ form.hidden_tag() }}
         
         <div>
             <label for="title">{{ form.title.label }}</label>
-            {{ form.title(class_="form-control") }}
+            {{ form.title() }}
         </div>
         
         <div>
             <label for="description">{{ form.description.label }}</label>
-            {{ form.description(class_="form-control") }}
+            {{ form.description() }}
         </div>
         
         <div>
@@ -40,8 +39,7 @@
         </div>
     </form>
 
-    <br>
-    <!-- Link para voltar à lista de tarefas -->
-    <a href="{{ url_for('tasks') }}">Ver Tarefas</a>
+    <a href="{{ url_for('tasks') }}">Voltar para Tarefas</a> <!-- Botão de Voltar -->
+
 </body>
 </html>

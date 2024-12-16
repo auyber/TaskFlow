@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Tarefa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <h2>Editar Tarefa</h2>
@@ -26,7 +27,7 @@
     </form>
 
     <br>
-    <a href="{{ url_for('index') }}">Voltar para o Index</a>  <!-- Botão de Voltar -->
+    <a href="{{ url_for('tasks') }}">Voltar para Minhas Tarefas</a> <!-- Ajuste para voltar diretamente para as tarefas -->
 
 </body>
 </html>
