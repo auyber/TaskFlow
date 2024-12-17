@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <!-- Topo da página com o nome do projeto -->
-    <header class="text-center py-4">
-        <h1>TaskFlow</h1>
-    </header>
-
-    <!-- Conteúdo principal -->
-    <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
-        <div class="col-12 col-md-6">
-            <!-- Exibir mensagens de erro (flash) -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <ul>
-                        {% for category, message in messages %}
-                            <li class="flash-{{ category }}">{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-
-            <!-- Formulário de login -->
-            <form method="POST">
-                {{ form.hidden_tag() }} <!-- Proteção contra CSRF -->
-                
-                <!-- Campo de email -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">{{ form.email.label }}</label>
-                    {{ form.email(class="form-control") }}
-                </div>
-
-                <!-- Campo de senha -->
-                <div class="mb-3">
-                    <label for="password" class="form-label">{{ form.password.label }}</label>
-                    {{ form.password(class="form-control") }}
-                </div>
-
-                <!-- Botão para enviar o formulário -->
-                <div class="mb-3 text-center">
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                </div>
-            </form>
-
-            <div class="text-center">
-                <p>Não tem uma conta? <a href="{{ url_for('register') }}" class="btn btn-link">Cadastre-se</a></p>
+    <div class="container">
+        <h1 class="page-title">TaskFlow</h1>
+        <form class="login-register-form" method="POST">
+            <h2 class="text-center">Faça login</h2>
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(class="form-control") }}
             </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="form-control") }}
+            </div>
+            <div class="form-group text-center">
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+        <div class="text-center">
+            <p>Não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se</a></p>
         </div>
     </div>
     <footer class="bg-dark text-white text-center mt-auto py-3">

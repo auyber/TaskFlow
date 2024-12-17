@@ -150,6 +150,75 @@ footer {
     color: #fff;
 }
 
+/* Estilos específicos para as páginas de login e registro */
+.login-register-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-register-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.login-register-form input[type="text"],
+.login-register-form input[type="password"],
+.login-register-form input[type="email"],
+.login-register-form textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-register-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.login-register-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para o título TaskFlow */
+.page-title {
+    font-size: 5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+/* Estilo para os textos de links de login e cadastro */
+.text-center {
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
 /* Ajustes para exibição em dispositivos móveis */
 @media (max-width: 768px) {
     .navbar-nav {

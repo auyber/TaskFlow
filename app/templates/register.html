@@ -1,63 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Cadastro - TaskFlow</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h2>Register</h2>
-
-    <!-- Exibir mensagens de erro (flash) -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-    <!-- Formulário de registro -->
-    <form method="POST">
-        {{ form.hidden_tag() }}  <!-- Proteção contra CSRF -->
-        
-        <!-- Campo de nome de usuário -->
-        <div>
-            <label for="username">{{ form.username.label }}</label>
-            {{ form.username() }}  <!-- Exibe o campo de input para o nome de usuário -->
+    <div class="container">
+        <h1 class="page-title">TaskFlow</h1>
+        <form class="login-register-form" method="POST">
+            <h2 class="text-center">Cadastre-se</h2>
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="form-control") }}
+            </div>
+            <div class="form-group text-center">
+                <button type="submit">Cadastrar</button>
+            </div>
+        </form>
+        <div class="text-center">
+            <p>Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a></p>
         </div>
+    </div>
 
-        <!-- Campo de email -->
-        <div>
-            <label for="email">{{ form.email.label }}</label>
-            {{ form.email() }}  <!-- Exibe o campo de input para o email -->
-            
-            <!-- Exibe erros específicos do campo de email -->
-            {% for error in form.email.errors %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
-        </div>
-
-        <!-- Campo de senha -->
-        <div>
-            <label for="password">{{ form.password.label }}</label>
-            {{ form.password() }}  <!-- Exibe o campo de input para a senha -->
-        </div>
-
-        <!-- Botão para enviar o formulário -->
-        <div>
-            <button type="submit">Register</button>
-        </div>
-    </form>
-
-    <!-- Link para a página de login, caso o usuário já tenha uma conta -->
-    <p>Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a></p>
+    <footer class="bg-dark text-white text-center mt-auto py-3">
+        <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
+    </footer>
 </body>
-
-<footer class="bg-dark text-white text-center mt-auto py-3">
-    <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
-</footer>
 </html>
