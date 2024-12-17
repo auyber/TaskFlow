@@ -4,29 +4,29 @@ from wtforms.validators import DataRequired, Email, Length
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[
-        DataRequired(message="O e-mail é obrigatório."),  # Mensagem de erro se o campo estiver vazio
-        Email(message="Digite um e-mail válido.")  # Mensagem de erro se o formato for inválido
+        DataRequired(message="Email is required."),  # Error message if the field is empty
+        Email(message="Please enter a valid email address.")  # Error message if the format is invalid
     ])
-    password = PasswordField('Senha', validators=[DataRequired(message="A senha é obrigatória.")])
-    submit = SubmitField('Entrar')
+    password = PasswordField('Password', validators=[DataRequired(message="Password is required.")])
+    submit = SubmitField('Login')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Nome de usuário', validators=[
-        DataRequired(message="O nome de usuário é obrigatório."), 
-        Length(min=2, max=20, message="O nome de usuário deve ter entre 2 e 20 caracteres.")
+    username = StringField('Username', validators=[
+        DataRequired(message="Username is required."), 
+        Length(min=2, max=20, message="Username must be between 2 and 20 characters.")
     ])
     email = StringField('Email', validators=[
-        DataRequired(message="O e-mail é obrigatório."), 
-        Email(message="Digite um e-mail válido.")
+        DataRequired(message="Email is required."), 
+        Email(message="Please enter a valid email address.")
     ])
-    password = PasswordField('Senha', validators=[DataRequired(message="A senha é obrigatória.")])
-    submit = SubmitField('Cadastrar')
+    password = PasswordField('Password', validators=[DataRequired(message="Password is required.")])
+    submit = SubmitField('Register')
 
 class TaskForm(FlaskForm):
-    title = StringField('Título', validators=[DataRequired(message="O título é obrigatório.")])
-    description = TextAreaField('Descrição')
-    submit = SubmitField('Criar Tarefa')
+    title = StringField('Title', validators=[DataRequired(message="Title is required.")])
+    description = TextAreaField('Description')
+    submit = SubmitField('Create Task')
 
 class QuickThoughtForm(FlaskForm):
-    content = TextAreaField('Pensamento Rápido', validators=[DataRequired(message="O conteúdo não pode estar vazio.")])
-    submit = SubmitField('Adicionar Pensamento')
+    content = TextAreaField('Quick Thought', validators=[DataRequired(message="Content cannot be empty.")])
+    submit = SubmitField('Add Thought')

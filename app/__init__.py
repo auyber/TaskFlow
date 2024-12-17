@@ -2,37 +2,37 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
-import os  # Para gerar uma chave secreta aleatória
+import os  # To generate a random secret key
 
-# Inicializar a instância do banco de dados, do login e do Migrate
+# Initialize the database instance, login, and Migrate
 db = SQLAlchemy()
 login_manager = LoginManager()
 migrate = Migrate()
 
 def create_app():
-    # Criar a instância do Flask
+    # Create the Flask instance
     app = Flask(__name__)
 
-    # Configurações do aplicativo
-    app.config['SECRET_KEY'] = os.urandom(24)  # Gerando uma chave secreta aleatória
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Caminho para o banco de dados
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Desabilitar modificações de rastreamento no SQLAlchemy
+    # App configurations
+    app.config['SECRET_KEY'] = os.urandom(24)  # Generating a random secret key
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Database path
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable SQLAlchemy modification tracking
 
-    # Inicializar o banco de dados, o login e o Flask-Migrate
+    # Initialize the database, login, and Flask-Migrate
     db.init_app(app)
     login_manager.init_app(app)
-    migrate.init_app(app, db)  # Inicializando o Migrate com a app e o db
+    migrate.init_app(app, db)  # Initializing Migrate with the app and db
 
-    # Definir o user_loader
-    from app.models import User  # Importação da classe User dentro da função create_app
+    # Define the user_loader
+    from app.models import User  # Importing the User class inside the create_app function
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id))  # Retorna o usuário com base no ID da sessão
+        return User.query.get(int(user_id))  # Returns the user based on the session ID
 
-    # Importar as rotas dentro da função para evitar importação circular
+    # Import routes inside the function to avoid circular import
     from app.routes import init_routes
     init_routes(app)
 
-    app.config['DEBUG'] = True  # Configuração de debug
+    app.config['DEBUG'] = True  # Debug configuration
 
     return app

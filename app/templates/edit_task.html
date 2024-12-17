@@ -1,20 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Editar Tarefa{% endblock %}
+{% block title %}Edit Task{% endblock %}
 
 {% block content %}
-    <h2>Editar Tarefa</h2>
+    <h2>Edit Task</h2>
+    <!-- Task editing form -->
     <form method="POST">
         {{ form.hidden_tag() }}
         <div class="mb-3">
+            <!-- Task title field -->
             <label for="title" class="form-label">{{ form.title.label }}</label>
             {{ form.title(class="form-control") }}
         </div>
         <div class="mb-3">
+            <!-- Task description field -->
             <label for="description" class="form-label">{{ form.description.label }}</label>
             {{ form.description(class="form-control") }}
         </div>
-        <button type="submit" class="btn btn-primary">Atualizar Tarefa</button>
+        <!-- Submit button to update the task -->
+        <button type="submit" class="btn btn-primary">Update Task</button>
     </form>
-    <a href="{{ url_for('tasks') }}" class="btn btn-link">Voltar para Minhas Tarefas</a>
+    <!-- Link to return to the task list -->
+    <a href="{{ url_for('tasks') }}" class="btn btn-link">Back to My Tasks</a>
 {% endblock %}

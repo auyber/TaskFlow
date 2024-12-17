@@ -6,7 +6,7 @@ from app.forms import RegistrationForm, LoginForm
 
 auth = Blueprint('auth', __name__)
 
-# Rota para registro de novo usuário
+# Route for registering a new user
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -19,7 +19,7 @@ def register():
         return redirect(url_for('auth.login'))
     return render_template('register.html', form=form)
 
-# Rota para login de usuário
+# Route for user login
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -33,7 +33,7 @@ def login():
             flash('Login unsuccessful. Check email and password.', 'danger')
     return render_template('login.html', form=form)
 
-# Rota para logout de usuário
+# Route for user logout
 @auth.route('/logout')
 def logout():
     logout_user()

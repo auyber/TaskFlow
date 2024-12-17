@@ -1,59 +1,60 @@
 {% extends "base.html" %}
 
-{% block title %}Bem-vindo ao TaskFlow{% endblock %}
+{% block title %}Welcome to TaskFlow{% endblock %}
 
 {% block content %}
     {% if current_user.is_authenticated %}
+        <!-- Welcome message for the logged-in user -->
         <div class="text-center">
-            <h1>Bem-vindo, {{ current_user.username }}!</h1>
+            <h1>Welcome, {{ current_user.username }}!</h1>
         </div>
 
-        <!-- Resumo de Tarefas e Pensamentos -->
+        <!-- Summary of Tasks and Quick Thoughts -->
         <div class="container mt-4">
             <div class="row">
-                <!-- Resumo de Tarefas -->
+                <!-- Summary of Tasks -->
                 <div class="col-md-6">
                     <div class="alert alert-info">
-                        <strong>Tarefas Pendentes:</strong> {{ tasks|length }} Tarefas
-                        <!-- Botão abaixo da descrição, centralizado -->
+                        <strong>Pending Tasks:</strong> {{ tasks|length }} Tasks
+                        <!-- Button below the description, centered -->
                         <div class="d-flex justify-content-center mt-3">
-                            <a href="{{ url_for('tasks') }}" class="btn btn-info">Ver Tarefas</a>
+                            <a href="{{ url_for('tasks') }}" class="btn btn-info">View Tasks</a>
                         </div>
                     </div>
                 </div>
-                <!-- Resumo de Pensamentos -->
+                <!-- Summary of Quick Thoughts -->
                 <div class="col-md-6">
                     <div class="alert alert-info">
-                        <strong>Pensamentos Rápidos:</strong> {{ thoughts|length }} Pensamentos
-                        <!-- Botão abaixo da descrição, centralizado -->
+                        <strong>Quick Thoughts:</strong> {{ thoughts|length }} Thoughts
+                        <!-- Button below the description, centered -->
                         <div class="d-flex justify-content-center mt-3">
-                            <a href="{{ url_for('quick_thought') }}" class="btn btn-info">Ver Pensamentos</a>
+                            <a href="{{ url_for('quick_thought') }}" class="btn btn-info">View Thoughts</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Ações rápidas -->
+        <!-- Quick Actions -->
         <div class="container mt-4">
             <div class="row">
-                <!-- Criar nova tarefa -->
+                <!-- Create New Task -->
                 <div class="col-md-6 d-flex">
                     <div class="card flex-fill">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Criar Nova Tarefa</h5>
-                            <p class="card-text">Comece a adicionar suas tarefas para se organizar.</p>
-                            <a href="{{ url_for('create_task') }}" class="btn btn-primary">Criar Tarefa</a>
+                            <h5 class="card-title">Create New Task</h5>
+                            <p class="card-text">Start adding your tasks to stay organized.</p>
+                            <a href="{{ url_for('create_task') }}" class="btn btn-primary">Create Task</a>
                         </div>
                     </div>
                 </div>
-                <!-- Criar novo pensamento -->
+                <!-- Add New Thought -->
                 <div class="col-md-6 d-flex">
                     <div class="card flex-fill">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Adicionar Pensamento</h5>
-                            <p class="card-text">Anote suas ideias rápidas para revisá-las depois.</p>
-                            <a href="{{ url_for('quick_thought') }}" class="btn btn-primary">Adicionar Pensamento</a>
+                            <h5 class="card-title">Add Thought</h5>
+                            <p class="card-text">Quickly jot down your ideas to review later.</p>
+                            <a href="{{ url_for('quick_thought') }}" class="btn btn-primary">Add Thought</a>
                         </div>
                     </div>
                 </div>
@@ -61,10 +62,12 @@
         </div>
 
     {% else %}
+        <!-- Welcome message for non-authenticated users -->
         <div class="text-center">
-            <h1>Bem-vindo ao TaskFlow!</h1>
+            <h1>Welcome to TaskFlow!</h1>
+            <!-- Login and Register buttons -->
             <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a> | 
-            <a href="{{ url_for('register') }}" class="btn btn-secondary">Registrar</a>
+            <a href="{{ url_for('register') }}" class="btn btn-secondary">Register</a>
         </div>
     {% endif %}
 {% endblock %}

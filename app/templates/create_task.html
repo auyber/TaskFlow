@@ -1,20 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Criar Tarefa{% endblock %}
+{% block title %}Create Task{% endblock %}
 
 {% block content %}
-    <h2>Criar Tarefa</h2>
+    <h2>Create Task</h2>
+    <!-- Task creation form -->
     <form method="POST">
         {{ form.hidden_tag() }}
         <div class="mb-3">
+            <!-- Task title field -->
             <label for="title" class="form-label">{{ form.title.label }}</label>
             {{ form.title(class="form-control") }}
         </div>
         <div class="mb-3">
+            <!-- Task description field -->
             <label for="description" class="form-label">{{ form.description.label }}</label>
             {{ form.description(class="form-control") }}
         </div>
-        <button type="submit" class="btn btn-primary">Criar Tarefa</button>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary">Create Task</button>
     </form>
-    <a href="{{ url_for('tasks') }}" class="btn btn-link">Voltar para Tarefas</a>
+    <!-- Link to return to the task list -->
+    <a href="{{ url_for('tasks') }}" class="btn btn-link">Back to Tasks</a>
 {% endblock %}

@@ -1,6 +1,6 @@
 /* styles.css */
 
-/* Estilo geral */
+/* General style */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -11,14 +11,14 @@ body {
     min-height: 100vh;
 }
 
-/* Cabeçalho */
+/* Header */
 h2, h3 {
     color: #333;
     text-align: center;
     margin-top: 20px;
 }
 
-/* Formulário */
+/* Form style */
 form {
     max-width: 500px;
     margin: 0 auto;
@@ -60,7 +60,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Lista de tarefas e pensamentos */
+/* Task and quick thought list */
 ul {
     list-style-type: none;
     padding: 0;
@@ -85,7 +85,7 @@ a:hover {
     color: #0056b3;
 }
 
-/* Mensagens de sucesso e erro */
+/* Success and error messages */
 .success {
     color: green;
     font-weight: bold;
@@ -98,32 +98,32 @@ a:hover {
 
 /* Navbar */
 .navbar {
-    background-color: #f8f9fa; /* Cor de fundo mais clara */
-    border-bottom: 1px solid #ddd; /* Adiciona uma borda sutil */
+    background-color: #f8f9fa; /* Lighter background color */
+    border-bottom: 1px solid #ddd; /* Adds a subtle border */
 }
 
 .navbar-nav .nav-link {
-    color: #495057 !important; /* Cor mais suave para links */
+    color: #495057 !important; /* Softer link color */
 }
 
 .navbar-nav .nav-link:hover {
     color: #007bff !important;
 }
 
-/* Estilo do menu expansível */
+/* Expandable menu style */
 .navbar-toggler-icon {
     background-color: #007bff;
 }
 
-/* Layout de página */
+/* Page layout */
 .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    flex-grow: 1; /* Permite que o conteúdo ocupe o restante da altura disponível */
+    flex-grow: 1; /* Allows content to take up remaining height */
 }
 
-/* Footer fixo */
+/* Fixed footer */
 footer {
     background-color: #343a40;
     color: #fff;
@@ -131,10 +131,10 @@ footer {
     padding: 10px 0;
     width: 100%;
     bottom: 0;
-    margin-top: auto; /* Empurra o footer para a parte inferior */
+    margin-top: auto; /* Pushes the footer to the bottom */
 }
 
-/* Estilo de botões personalizados */
+/* Custom button styles */
 .btn-outline-light {
     color: #fff;
     border-color: #fff;
@@ -145,7 +145,7 @@ footer {
     color: #fff;
 }
 
-/* Estilos específicos para as páginas de login e registro */
+/* Styles for login and register pages */
 .login-register-form {
     max-width: 500px;
     margin: 0 auto;
@@ -192,7 +192,7 @@ footer {
     background-color: #0056b3;
 }
 
-/* Estilo para o título TaskFlow */
+/* Title style for TaskFlow */
 .page-title {
     font-size: 5rem;
     font-weight: bold;
@@ -200,13 +200,13 @@ footer {
     margin-bottom: 100px;
 }
 
-/* Estilo para os textos de links de login e cadastro */
+/* Styles for login and register link texts */
 .text-center {
     text-align: center;
     margin-top: 10px;
 }
 
-/* Estilos específicos para as páginas de tasks e quick_thought */
+/* Specific styles for tasks and quick thoughts pages */
 .task-quick-thought-container {
     position: relative;
     padding: 15px;
@@ -218,7 +218,7 @@ footer {
 
 .task-quick-thought-container .description {
     margin-bottom: 20px;
-    padding-right: 40px; /* Adiciona espaço para os botões no canto direito */
+    padding-right: 40px; /* Adds space for buttons on the right corner */
 }
 
 .task-quick-thought-container .buttons {
@@ -244,7 +244,7 @@ footer {
     background-color: #0056b3;
 }
 
-/* Remove bordas visíveis dos formulários de exclusão */
+/* Removes visible borders from delete forms */
 .delete-form {
     border: none;
     margin: 0;
@@ -260,12 +260,17 @@ footer {
     cursor: pointer;
 }
 
-/* Adiciona estilo para o botão excluir */
+/* Add styles for delete button */
 .delete-form button:hover {
     color: red;
 }
 
-/* Ajustes para exibição em dispositivos móveis */
+/* Sets the maximum width for the navbar */
+.navbar .container {
+    max-width: 768px;
+}
+
+/* Adjustments for mobile display */
 @media (max-width: 1600px) {
     .navbar-nav {
         text-align: center;

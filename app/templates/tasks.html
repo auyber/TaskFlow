@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Minhas Tarefas{% endblock %}
+{% block title %}My Tasks{% endblock %}
 
 {% block content %}
-    <h2>Minhas Tarefas</h2>
+    <h2>My Tasks</h2>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
@@ -22,9 +22,9 @@
                     <p>{{ task.description }}</p>
                 </div>
                 <div class="buttons">
-                    <button class="edit-task-btn" data-task-id="{{ task.id }}" onclick="showEditForm({{ task.id }})">Editar</button>
+                    <button class="edit-task-btn" data-task-id="{{ task.id }}" onclick="showEditForm({{ task.id }})">Edit</button>
                     <form action="{{ url_for('delete_task', task_id=task.id) }}" method="POST" class="delete-form" style="display:inline;">
-                        <button type="submit">Excluir</button>
+                        <button type="submit">Delete</button>
                     </form>
                 </div>
             </li>
@@ -32,7 +32,7 @@
     </ul>
 
     <div id="edit-form-container" style="display:none;">
-        <h3>Editar Tarefa</h3>
+        <h3>Edit Task</h3>
         <form method="POST">
             {{ form.hidden_tag() }}
             <input type="hidden" name="task_id" id="task-id-input">
@@ -44,12 +44,12 @@
                 <label for="description" class="form-label">{{ form.description.label }}</label>
                 {{ form.description(class="form-control") }}
             </div>
-            <button type="submit" class="btn btn-primary">Atualizar Tarefa</button>
+            <button type="submit" class="btn btn-primary">Update Task</button>
         </form>
     </div>
 
-    <a href="{{ url_for('create_task') }}" class="btn btn-primary">Criar Tarefa</a>
-    <a href="{{ url_for('index') }}" class="btn btn-link">Voltar para o Index</a>
+    <a href="{{ url_for('create_task') }}" class="btn btn-primary">Create Task</a>
+    <a href="{{ url_for('index') }}" class="btn btn-link">Back</a>
 
     <script>
         function showEditForm(taskId) {
