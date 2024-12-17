@@ -4,69 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
-                <h2 id="register" class="mb-3">Register</h2> <!-- ID usado no estilo do CSS -->
+    <h2>Register</h2>
 
-                <!-- Exibir mensagens de erro (flash) -->
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        <div class="flash-message-container">
-                            {% for category, message in messages %}
-                                <div class="flash-message {{ category }}">{{ message }}</div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                {% endwith %}
+    <!-- Exibir mensagens de erro (flash) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
-                <!-- Formulário de registro -->
-                <form method="POST">
-                    {{ form.hidden_tag() }}
-
-                    <!-- Campo de nome de usuário -->
-                    <div class="mb-3">
-                        <label for="username" class="form-label">{{ form.username.label }}</label>
-                        {{ form.username(class_='form-control') }}
-                    </div>
-
-                    <!-- Campo de email -->
-                    <div class="mb-3">
-                        <label for="email" class="form-label">{{ form.email.label }}</label>
-                        {{ form.email(class_='form-control') }}
-                        {% for error in form.email.errors %}
-                            <p class="error">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-
-                    <!-- Campo de senha -->
-                    <div class="mb-3">
-                        <label for="password" class="form-label">{{ form.password.label }}</label>
-                        {{ form.password(class_='form-control') }}
-                    </div>
-
-                    <!-- Botão para enviar o formulário -->
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </div>
-                </form>
-
-                <!-- Link para a página de login -->
-                <p class="text-center mt-3 mb-0">
-                    Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a>
-                </p>
-            </div>
+    <!-- Formulário de registro -->
+    <form method="POST">
+        {{ form.hidden_tag() }}  <!-- Proteção contra CSRF -->
+        
+        <!-- Campo de nome de usuário -->
+        <div>
+            <label for="username">{{ form.username.label }}</label>
+            {{ form.username() }}  <!-- Exibe o campo de input para o nome de usuário -->
         </div>
-    </div>
 
-    <footer>
-        <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
-    </footer>
+        <!-- Campo de email -->
+        <div>
+            <label for="email">{{ form.email.label }}</label>
+            {{ form.email() }}  <!-- Exibe o campo de input para o email -->
+            
+            <!-- Exibe erros específicos do campo de email -->
+            {% for error in form.email.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Campo de senha -->
+        <div>
+            <label for="password">{{ form.password.label }}</label>
+            {{ form.password() }}  <!-- Exibe o campo de input para a senha -->
+        </div>
+
+        <!-- Botão para enviar o formulário -->
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+
+    <!-- Link para a página de login, caso o usuário já tenha uma conta -->
+    <p>Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a></p>
 </body>
 </html>

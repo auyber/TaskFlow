@@ -1,3 +1,5 @@
+/* styles.css */
+
 /* Estilo geral */
 body {
     font-family: Arial, sans-serif;
@@ -9,13 +11,6 @@ body {
     min-height: 100vh;
 }
 
-/* Título centralizado */
-#login, #register {
-    text-align: center;
-    font-size: 10vh; /* Tamanho ajustado para o título */
-    margin-bottom: 20px; /* Ajusta o espaço abaixo do título */
-}
-
 /* Cabeçalho */
 h2, h3 {
     color: #333;
@@ -25,7 +20,7 @@ h2, h3 {
 
 /* Formulário */
 form {
-    max-width: 400px; /* Tamanho do formulário ajustado para ser igual ao do login */
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -34,46 +29,50 @@ form {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para os labels */
 label {
-    font-size: 16px; /* Tamanho do label igual ao do login */
-    margin-bottom: 8px; /* Espaçamento entre o label e o campo de entrada */
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
     color: #555;
-    display: block; /* Garante que o label ocupe a largura total */
 }
 
-/* Garantir que os campos de input também tenham o mesmo tamanho */
-input[type="text"], input[type="password"], input[type="email"] {
-    width: 90%; /* Ajustado para ocupar toda a largura disponível */
-    padding: 12px; /* Aumentado o padding para um melhor espaçamento */
-    margin-bottom: 15px; /* Reduzi o espaçamento entre os campos */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
 
-/* Botão */
 button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 12px 12px; /* Ajustado para ter o mesmo padding que os inputs */
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    width: 100%; /* Faz o botão ocupar toda a largura do formulário */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-/* Texto abaixo do formulário */
-.text-center {
-    margin-top: 10px; /* Reduzi o espaçamento acima */
-    font-size: 14px; /* Ajuste no tamanho do texto */
-    color: #555; /* Cor mais discreta */
+/* Lista de tarefas e pensamentos */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin: 5px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Links */
@@ -118,15 +117,14 @@ a:hover {
 
 /* Layout de página */
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Ajustar a formatação do formulário */
-form {
-    width: 100%; /* Garante que o formulário ocupe a largura total do container */
-    margin-bottom: 10px; /* Espaçamento pequeno abaixo do formulário */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
 /* Footer fixo */
@@ -152,64 +150,6 @@ footer {
     color: #fff;
 }
 
-/* Estilo para formulários inline */
-form.inline-form {
-    display: inline-flex;
-    gap: 5px;
-    align-items: center;
-}
-
-form.inline-form input {
-    width: auto;
-    padding: 5px;
-    font-size: 14px;
-}
-
-form.inline-form button {
-    padding: 5px 10px;
-    font-size: 14px;
-}
-
-/* Botões menores */
-.btn-sm {
-    padding: 5px 10px;
-    font-size: 12px;
-    margin-left: 5px;
-}
-
-/* Estilo da lista */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    padding: 10px; /* Espaçamento interno */
-    border-radius: 5px; /* Borda arredondada */
-    background-color: #fff; /* Cor de fundo branca para o pensamento */
-}
-
-/* Estilo dos links de ação (Editar e Excluir) lado a lado */
-.action-links {
-    display: flex;
-    gap: 10px; /* Espaçamento entre os links */
-    margin-top: 10px; /* Adiciona um espaçamento entre o conteúdo e os links */
-}
-
-.action-links .btn-link {
-    padding: 0; /* Remove o padding dos links para que eles fiquem mais compactos */
-    font-size: 16px; /* Tamanho da fonte ajustado para combinar com o resto */
-    color: #007bff;
-    text-decoration: none;
-}
-
-.action-links .btn-link:hover {
-    color: #0056b3;
-}
-
 /* Ajustes para exibição em dispositivos móveis */
 @media (max-width: 768px) {
     .navbar-nav {
@@ -223,35 +163,4 @@ li {
     .container {
         padding: 10px;
     }
-}
-
-/* Mensagens Flash */
-.flash-message-container {
-    width: 90%; /* Ajuste para que a mensagem ocupe 90% da largura da tela */
-    max-width: 600px; /* Limite máximo de largura para que não fique muito larga */
-    margin: 20px auto; /* Centraliza horizontalmente e adiciona um espaçamento superior e inferior */
-    padding: 15px;
-    text-align: center; /* Alinha o texto ao centro */
-}
-
-/* Estilo de mensagem de sucesso */
-.flash-message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-}
-
-/* Estilo de mensagem de erro */
-.flash-message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
 }

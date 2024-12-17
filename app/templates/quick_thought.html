@@ -39,15 +39,14 @@
                     </div>
                 </form>
             {% else %}
-                {{ thought.content }} 
-                <div class="action-links">
-                    <a href="{{ url_for('quick_thought', edit=thought.id) }}" class="btn btn-link">Editar</a>
-                    <a href="{{ url_for('delete_thought', thought_id=thought.id) }}" class="btn btn-link">Excluir</a>
-                </div>
+                {{ thought.content }} - 
+                <a href="{{ url_for('quick_thought', edit=thought.id) }}" class="btn btn-link">Editar</a> | 
+                <form action="{{ url_for('delete_thought', thought_id=thought.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-link">Excluir</button>
+                </form>
             {% endif %}
         </li>
-    {% endfor %}
-
+        {% endfor %}
     </ul>
 
     <a href="{{ url_for('index') }}" class="btn btn-link">Voltar para o Index</a>

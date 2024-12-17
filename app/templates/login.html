@@ -9,12 +9,12 @@
 <body>
     <!-- Topo da página com o nome do projeto -->
     <header class="text-center py-4">
-        <h1 id="login">TaskFlow</h1>
+        <h1>TaskFlow</h1>
     </header>
 
     <!-- Conteúdo principal -->
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="col-12 col-md-06">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="col-12 col-md-6">
             <!-- Exibir mensagens de erro (flash) -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -48,16 +48,10 @@
                 </div>
             </form>
 
-            <!-- Texto centralizado abaixo do formulário -->
             <div class="text-center">
                 <p>Não tem uma conta? <a href="{{ url_for('register') }}" class="btn btn-link">Cadastre-se</a></p>
             </div>
         </div>
     </div>
-
-    <!-- Footer fixo -->
-    <footer>
-        <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
-    </footer>
 </body>
 </html>

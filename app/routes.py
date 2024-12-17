@@ -198,6 +198,7 @@ def init_routes(app):
         return redirect(url_for('quick_thought'))
 
 
+
     @app.route('/logout')
     @login_required
     def logout():

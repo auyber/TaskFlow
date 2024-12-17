@@ -4,45 +4,52 @@
 
 {% block content %}
     <h2>Minhas Tarefas</h2>
-
-    <!-- Exibir mensagens flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <div class="flash-message-container">
+            <ul>
                 {% for category, message in messages %}
-                    <div class="flash-message {{ category }}">
-                        {{ message }}
-                    </div>
+                    <li class="alert {{ category }}">{{ message }}</li>
                 {% endfor %}
-            </div>
+            </ul>
         {% endif %}
     {% endwith %}
 
-    <!-- Lista de Tarefas -->
     <ul>
         {% for task in tasks %}
             <li>
-                <strong>{{ task.title }}</strong> - {{ task.description }}
-
-                <!-- Botão para excluir -->
+                {{ task.title }} - {{ task.description }}
+                <button class="edit-task-btn" data-task-id="{{ task.id }}" onclick="showEditForm({{ task.id }})">Editar</button>
                 <form action="{{ url_for('delete_task', task_id=task.id) }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                </form>
-
-                <!-- Formulário Inline para Editar Tarefa -->
-                <form action="{{ url_for('edit_task', task_id=task.id) }}" method="POST" style="display:inline;">
-                    {{ form.hidden_tag() }}
-                    <input type="text" name="title" value="{{ task.title }}" class="form-control form-control-sm" placeholder="Título">
-                    <input type="text" name="description" value="{{ task.description }}" class="form-control form-control-sm" placeholder="Descrição">
-                    <button type="submit" class="btn btn-primary btn-sm">Atualizar</button>
+                    <button type="submit">Excluir</button>
                 </form>
             </li>
-        {% else %}
-            <p>Nenhuma tarefa encontrada.</p>
         {% endfor %}
     </ul>
 
-    <!-- Link para Criar Nova Tarefa -->
-    <a href="{{ url_for('create_task') }}" class="btn btn-success">Criar Nova Tarefa</a>
+    <div id="edit-form-container" style="display:none;">
+        <h3>Editar Tarefa</h3>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <input type="hidden" name="task_id" id="task-id-input">
+            <div class="mb-3">
+                <label for="title" class="form-label">{{ form.title.label }}</label>
+                {{ form.title(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">{{ form.description.label }}</label>
+                {{ form.description(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar Tarefa</button>
+        </form>
+    </div>
+
+    <a href="{{ url_for('create_task') }}" class="btn btn-primary">Criar Tarefa</a>
     <a href="{{ url_for('index') }}" class="btn btn-link">Voltar para o Index</a>
+
+    <script>
+        function showEditForm(taskId) {
+            document.getElementById('task-id-input').value = taskId;
+            document.getElementById('edit-form-container').style.display = 'block';
+        }
+    </script>
 {% endblock %}
