@@ -120,11 +120,7 @@ a:hover {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-}
-
-h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    flex-grow: 1; /* Permite que o conteúdo ocupe o restante da altura disponível */
 }
 
 /* Footer fixo */
@@ -133,10 +129,9 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
     width: 100%;
     bottom: 0;
-    left: 0;
+    margin-top: auto; /* Empurra o footer para a parte inferior */
 }
 
 /* Estilo de botões personalizados */
@@ -269,15 +264,6 @@ footer {
 .delete-form button:hover {
     color: red;
 }
-
-
-
-
-
-
-
-
-
 
 /* Ajustes para exibição em dispositivos móveis */
 @media (max-width: 768px) {

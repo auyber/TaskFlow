@@ -10,41 +10,41 @@
 <body class="d-flex flex-column min-vh-100">
     <!-- Barra de navegação -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="{{ url_for('index') }}">TaskFlow</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('create_task') }}">Criar Tarefa</a>
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('tasks') }}">Minhas Tarefas</a>
+                        <a class="nav-link" href="{{ url_for('tasks') }}">Tasks</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('quick_thought') }}">Pensamentos Rápidos</a>
+                        <a class="nav-link" href="{{ url_for('quick_thought') }}">Quick Thoughts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                     </li>
                 </ul>
-                {% if current_user.is_authenticated %}
-                    <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a>
-                {% endif %}
             </div>
         </div>
     </nav>
 
     <!-- Conteúdo principal -->
-    <div class="container mt-5">
+    <div class="container mt-5 flex-grow-1">
         {% block content %}{% endblock %}
     </div>
 
     <!-- Footer fixo -->
-    <footer class="bg-dark text-white text-center mt-auto py-3">
-        <footer class="bg-dark text-white text-center mt-auto py-3">
-            <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
-        </footer>
-        
+    <footer class="bg-dark text-white text-center py-3">
+        <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
     </footer>
 
     <!-- Scripts Bootstrap -->

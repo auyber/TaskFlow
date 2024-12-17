@@ -201,7 +201,10 @@ def init_routes(app):
         flash("Pensamento excluído com sucesso!", "success")
         return redirect(url_for('quick_thought'))
 
-
+    @app.route('/contact')
+    @login_required
+    def contact():
+        return render_template('contact.html')
 
     @app.route('/logout')
     @login_required
