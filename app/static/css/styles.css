@@ -187,8 +187,28 @@ li {
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Borda arredondada */
+    background-color: #fff; /* Cor de fundo branca para o pensamento */
 }
 
+/* Estilo dos links de ação (Editar e Excluir) lado a lado */
+.action-links {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os links */
+    margin-top: 10px; /* Adiciona um espaçamento entre o conteúdo e os links */
+}
+
+.action-links .btn-link {
+    padding: 0; /* Remove o padding dos links para que eles fiquem mais compactos */
+    font-size: 16px; /* Tamanho da fonte ajustado para combinar com o resto */
+    color: #007bff;
+    text-decoration: none;
+}
+
+.action-links .btn-link:hover {
+    color: #0056b3;
+}
 
 /* Ajustes para exibição em dispositivos móveis */
 @media (max-width: 768px) {
