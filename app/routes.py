@@ -12,10 +12,14 @@ def init_routes(app):
         return "Concluída" if value else "Não concluída"
 
     # Página inicial
+    # Página inicial
     @app.route('/index')
     @login_required
     def index():
-        return render_template('index.html')
+        tasks = Task.query.filter_by(user_id=current_user.id).all()  # Obtém todas as tarefas do usuário
+        thoughts = QuickThought.query.filter_by(user_id=current_user.id).all()  # Obtém todos os pensamentos do usuário
+        return render_template('index.html', tasks=tasks, thoughts=thoughts)
+
 
     # Login
     @app.route('/', methods=['GET', 'POST'])

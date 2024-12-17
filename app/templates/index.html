@@ -7,6 +7,59 @@
         <div class="text-center">
             <h1>Bem-vindo, {{ current_user.username }}!</h1>
         </div>
+
+        <!-- Resumo de Tarefas e Pensamentos -->
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Resumo de Tarefas -->
+                <div class="col-md-6">
+                    <div class="alert alert-info">
+                        <strong>Tarefas Pendentes:</strong> {{ tasks|length }} Tarefas
+                        <!-- Botão abaixo da descrição, centralizado -->
+                        <div class="d-flex justify-content-center mt-3">
+                            <a href="{{ url_for('tasks') }}" class="btn btn-info">Ver Tarefas</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Resumo de Pensamentos -->
+                <div class="col-md-6">
+                    <div class="alert alert-info">
+                        <strong>Pensamentos Rápidos:</strong> {{ thoughts|length }} Pensamentos
+                        <!-- Botão abaixo da descrição, centralizado -->
+                        <div class="d-flex justify-content-center mt-3">
+                            <a href="{{ url_for('quick_thought') }}" class="btn btn-info">Ver Pensamentos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ações rápidas -->
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Criar nova tarefa -->
+                <div class="col-md-6 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Criar Nova Tarefa</h5>
+                            <p class="card-text">Comece a adicionar suas tarefas para se organizar.</p>
+                            <a href="{{ url_for('create_task') }}" class="btn btn-primary">Criar Tarefa</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Criar novo pensamento -->
+                <div class="col-md-6 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Adicionar Pensamento</h5>
+                            <p class="card-text">Anote suas ideias rápidas para revisá-las depois.</p>
+                            <a href="{{ url_for('quick_thought') }}" class="btn btn-primary">Adicionar Pensamento</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     {% else %}
         <div class="text-center">
             <h1>Bem-vindo ao TaskFlow!</h1>
