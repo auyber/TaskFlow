@@ -100,26 +100,33 @@ def init_routes(app):
             db.session.commit()
 
             flash("Tarefa criada com sucesso!", "create_task_success")
-            return redirect(url_for('create_task'))  # Mantém o usuário na página atual
+            return redirect(url_for('tasks'))  # Redireciona para a lista de tarefas
 
         return render_template('create_task.html', form=form)
 
-    @app.route('/task/edit/<int:task_id>', methods=['GET', 'POST'])
+    @app.route('/task/edit/<int:task_id>', methods=['POST'])
     @login_required
     def edit_task(task_id):
         task = Task.query.get_or_404(task_id)
+
         if task.user_id != current_user.id:
-            abort(403)  # Usuário não autorizado a editar esta tarefa
+            flash("Você não tem permissão para editar esta tarefa.", "error")
+            return redirect(url_for('tasks'))
 
-        form = TaskForm()
+        # Captura os dados do formulário inline
+        title = request.form.get('title')
+        description = request.form.get('description')
 
-        if form.validate_on_submit():
-            task.title = form.title.data
-            task.description = form.description.data
+        # Atualiza os campos da tarefa
+        if title and description:
+            task.title = title
+            task.description = description
             db.session.commit()
+            flash("Tarefa editada com sucesso!", "success")
+        else:
+            flash("Todos os campos são obrigatórios!", "error")
 
-            flash("Tarefa editada com sucesso!", "edit_task_success")
-            return redirect(url_for('tasks'))  # Redireciona para a página de tarefas após edição
+        return redirect(url_for('tasks'))
 
         # Preenche o formulário com os dados da tarefa para edição
         form.title.data = task.title

@@ -152,6 +152,44 @@ footer {
     color: #fff;
 }
 
+/* Estilo para formulários inline */
+form.inline-form {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+}
+
+form.inline-form input {
+    width: auto;
+    padding: 5px;
+    font-size: 14px;
+}
+
+form.inline-form button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* Botões menores */
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Estilo da lista */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+
 /* Ajustes para exibição em dispositivos móveis */
 @media (max-width: 768px) {
     .navbar-nav {
