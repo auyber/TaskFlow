@@ -37,6 +37,19 @@
         </div>
     </nav>
 
+    <!-- Exibição de mensagens de flash -->
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="list-unstyled">
+                    {% for category, message in messages %}
+                        <li class="alert alert-{{ category }} text-center">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
     <!-- Main content -->
     <div class="container mt-5 flex-grow-1">
         {% block content %}{% endblock %}

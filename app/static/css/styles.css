@@ -169,7 +169,7 @@ footer {
 .login-register-form input[type="password"],
 .login-register-form input[type="email"],
 .login-register-form textarea {
-    width: 90%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
