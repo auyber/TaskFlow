@@ -266,7 +266,7 @@ footer {
 }
 
 /* Ajustes para exibição em dispositivos móveis */
-@media (max-width: 768px) {
+@media (max-width: 1600px) {
     .navbar-nav {
         text-align: center;
     }
