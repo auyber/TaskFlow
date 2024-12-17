@@ -91,8 +91,65 @@ This file, providing a comprehensive overview of the project, its functionalitie
 - **Dark Mode**:  
   - Offer a dark theme for improved usability in low-light conditions.
 
-## Conclusion  
+## Instructions to Run the Project
 
-This project showcases the integration of Flask, SQLAlchemy, and essential web development practices to create a functional task management system. It prioritizes security, usability, and scalability, providing a solid foundation for further enhancements. With features like task management, quick thoughts capture, and user authentication, **TaskFlow** is an ideal tool for staying organized.
+To run **TaskFlow** locally, follow these steps:
+
+### Prerequisites:
+- Python 3.x
+- Virtualenv (recommended)
+- Flask
+- SQLAlchemy
+
+### Steps:
+
+1. **Clone the Repository**  
+   First, clone the repository to your local machine:
+   ```bash
+   git clone https://github.com/auyber/TaskFlow
+   cd taskflow
+
+2. **Set up a Virtual Environment** 
+    It’s recommended to use a virtual environment to manage dependencies:
+
+    python -m venv venv
+
+3. **Activate the Virtual Environment** 
+    On Windows:
+
+    venv\Scripts\activate
+    
+    On macOS/Linux:
+
+    source venv/bin/activate
+
+4. **Install Dependencies**
+    Install the required Python packages:
+
+    pip install -r requirements.txt
+
+5. **Set up the Database**
+    Run the following command to initialize the database:
+
+    python -m flask db upgrade
+
+6. **Run the Application**
+    Start the Flask application with:
+
+    python run.py
+
+    The application should now be running locally at http://127.0.0.1:5000.
+
+7. **Additional Configuration:**
+   **Environment Variables**
+    You may need to configure your environment variables for sensitive data like SECRET_KEY or database URL. Create a .env file in the root directory with the following:
+
+    FLASK_APP=run.py
+    FLASK_ENV=development
+    SECRET_KEY=your_secret_key
+
+### Conclusion:
+
+This project showcases the integration of Flask, SQLAlchemy, and essential web development practices to create a functional task management system. It prioritizes security, usability, and scalability, providing a solid foundation for further enhancements. With features like task management, quick thoughts capture, and user authentication, TaskFlow is an ideal tool for staying organized.
 
 Feedback and contributions are welcome to help improve and expand this project further.
