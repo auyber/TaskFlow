@@ -33,6 +33,6 @@ def create_app():
     from app.routes import init_routes
     init_routes(app)
 
-    app.config['DEBUG'] = True  # Debug configuration
+    app.config['DEBUG'] = False  # Debug configuration
 
     return app
