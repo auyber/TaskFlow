@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body class="d-flex flex-column min-vh-100">
+
+    {% if not request.endpoint in ['login', 'register'] %}
     <!-- Navigation bar -->
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
@@ -36,6 +38,7 @@
             </div>
         </div>
     </nav>
+    {% endif %}
 
     <!-- Exibição de mensagens de flash -->
     <div class="container mt-4">
@@ -55,10 +58,12 @@
         {% block content %}{% endblock %}
     </div>
 
-    <!-- Fixed footer -->
+    {% if request.endpoint in ['login', 'register'] %}
+    <!-- Fixed footer for login and register pages -->
     <footer class="bg-dark text-white text-center py-3">
         <p>© 2024 | All rights reserved | Website creation by <a href="https://github.com/auyber" target="_blank" class="text-white">Auyber Genesini Moura</a>.</p>
     </footer>
+    {% endif %}
 
     <!-- Bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
